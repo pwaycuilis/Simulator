@@ -1,23 +1,12 @@
-Team 23 members
+full version simulator that tracks cycle-by-cycle process (instruction-by-instruction version available in disassembler repository)
 
-Name:	Paul Waycuilis
-netID:	pkw20
-e-mail:	pkw20@txstate.edu
+cycle-by-cycle ARM instruction simulator
 
-Name:	Victor Hernandez
-netID:	v_h74
-email:	vichdz97@txstate.edu
+loads and executes binary ARM file. Produces disassembled program code and produces cycle-by-cycle simulation showing the processor state at each cycle. The processor state includes the contents of registers, buffers, cache, and data memory at each cycle.
 
+program supports command line arguments for execution: Following argument supported:
 
-Project is not finished. In an effort to submit something somewhat working and coherent,
-the program version submitted only handles R type instructions,
-and does not handle hazards. 
-
-Also cycles data quicker than the sample output and cache data output 
-is 1 cycle behind other output. 
-
-MEM unit not working.
-Also does not handle instructions that are not R type instrs
+$python team23_project3.py -i branchtest_bin.txt -o team23_out
+NOTE: can change input or output file name using -i or -o argument respectively
 
 
-ALSO: no working mechanism to end cycle, so it is manually set to cycle 12 times
