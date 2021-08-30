@@ -1,1 +1,0 @@
-team23_project3.py -i "D:\Paul\Documents\CompArchProj3\branchtest_bin.txt" -o "team23_out"
