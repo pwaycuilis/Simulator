@@ -1,1 +1,0 @@
-You will check cache for instructions in the fetch unit and check cache for data in the memory unit
