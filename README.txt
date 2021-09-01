@@ -13,6 +13,14 @@ $cd Simulator
 
 $python3 team23_project3.py -i branchtest_bin.txt -o team23_out
 
+Then display output printed to text files)
+(for cycle-by-cycle pipeline output)
+$cat team23_out_pipeline.txt
+
+For disassembler output: (list of assembly instructions translated from input file)
+
+$cat team23_out_dis.txt
+
 NOTE: can change input or output file name using -i or -o argument respectively
 
 
