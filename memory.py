@@ -33,37 +33,16 @@ class Memory:
         self.postMemBuff = [-1, -1]
 
 
-        print(f"(mem33)self.preMemBuff[0] = {self.preMemBuff[0]}")
-        print(f"(mem34)self.postMemBuff = {self.postMemBuff}")
-
         #from fetch
         #if self.cache.checkCache(-1, i, 0, 0):
 
         #some operation needed to check if there is any operations using needed register still in pipeline
-        """
-        if self.opcodeStr[i] == "STUR":
-            if (self.R[self.arg2[i]] + self.arg3[i] * 4) > self.address[-1]:
-                numAppend = ((self.R[self.arg2[i]] + self.arg3[i] * 4) - self.address[-1]) // 4
-
-                for z in range(numAppend):
-                    self.address.append(self.address[-1] + 4)
-                    self.dataval.append(0)
-
-                self.dataval[-1] = self.R[self.arg1[i]]
-
-                while (len(self.dataval) % 8 != 0):
-                    self.address.append(self.address[-1] + 4)
-                    self.dataval.append(0)
-        """
-
-        print(f"(mem55)self.R[self.arg2[i] : {self.R[self.arg2[i]]}")
-        print(f"(mem56)self.arg3[i]")
 
 
         if self.opcodeStr[i] == "STUR":
             #if self.cache.checkCache(i, i, 1, self.R[self.arg1[i]]):
             if (self.R[self.arg2[i]] + self.arg3[i] * 4) > self.address[-1]:
-                print(f"(mem62)appending if condition = true")
+                
                 numAppend = ((self.R[self.arg2[i]] + self.arg3[i] * 4) - self.address[-1]) // 4
 
                 for z in range(numAppend):
@@ -78,14 +57,9 @@ class Memory:
 
                 #added
             elif (self.R[self.arg2[i]] + self.arg3[i] * 4 ) <= self.address[-1]:
-                print(f"(mem80)self.R[self.arg2[i]] : {self.R[self.arg2[i]]}")
-                print(f"(mem81)self.R[self.arg3[i]] : {self.R[self.arg3[i]]}")
-                print(f"(mem82)self.address[-1] : {self.address[-1]}")
+  
                 for n in range(len(self.address)):
                     if self.R[self.arg2[i]] + (self.arg3[i] * 4 ) == self.address[n]:
-                        print(f"(mem86)self.dataval : {self.dataval}")
-                        print(f"(mem87)n : {n}")
-                        print(f"(mem88)self.numInstructions : {self.numInstructions}")
                         self.dataval[n - self.numInstructions] = self.R[self.arg1[i]]
 
 
@@ -103,31 +77,19 @@ class Memory:
                     self.preMemBuff[0] = self.preMemBuff[1]
                     self.preMemBuff[1] = -1
 
-        #*********testing
-        #print(f"(memory75)i = {i}")
-        #if self.opcodeStr[i] == "STUR" and self.cache.checkCache(i, i, 1, self.R[self.arg1[i]]):
-            #self.preMemBuff[0] = self.preMemBuff[1]
-            #self.preMemBuff[1] = -1
-        #*****testing
+ 
 
         #LDUR sends data and address to post-mem buffer
 
         if self.opcodeStr[i] == "LDUR": #LDUR Rd, [Rn #offset] #rd =arg1=destreg, rn = arg2=src1, arg3 = offset
             for n in range(len(self.address)):
                 if self.R[self.arg2[i]] + (self.arg3[i] * 4) == self.address[n]:
-                    print(f"(mem118)self.R[self.arg2[i]] : {self.R[self.arg2[i]]}")
-                    print(f"(mem119)self.arg3[i] : {self.arg3[i]}")
-                    print(f"(mem120)self.address[n] : {self.address[n]}")
+
                     dataIndex = (self.address[n] - (96 + (self.numInstructions * 4) )) // 4
-                    print(f"(mem122)dataIndex : {dataIndex}")
-                    #self.postMemBuff = [self.R[self.arg2[i]] + (self.arg3[i] * 4), i]
-                    #self.postMemBuff = [(RD + offset*4), i]
                     self.postMemBuff = [self.dataval[n - self.numInstructions], i]
-                    print(f"(mem126)self.postMemBuff = {self.postMemBuff}")
+                    
                 #testing...
             #if self.cache.checkCache(i,i, 1, self.R[self.arg1[i]]):
-            print(f"(mem127)self.R[self.arg1[i]] : {self.R[self.arg1[i]]}")
-            print(f"(mem128)i : {i}")
             if self.cache.checkCache(dataIndex, i, 0, self.R[self.arg1[i]]):
                 self.preMemBuff[0] = self.preMemBuff[1]
                 self.preMemBuff[1] = -1
@@ -149,10 +111,6 @@ class Memory:
 
 
 
-
-
-            #if self.cache.checkCache(i, i, 1, self.dataval[i]):
-                #numAppend = ()
 
         #how STUR is calculated in simulator.py (for reference)
         """
