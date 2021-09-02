@@ -57,14 +57,14 @@ class Issue:
                         or self.opcodeStr[self.preIssueBuff[i]] == "AND" or self.opcodeStr[self.preIssueBuff[i]] == "ORR"\
                         or self.opcodeStr[self.preIssueBuff[i]] == "EOR" or self.opcodeStr[self.preIssueBuff[i]] == "LSL"):
                     if self.preALUBuff[0] == -1 and self.preIssueBuff[i] == self.currIndex:# and self.address[i] == self.memIndexOfNext:    #and if preALUBuff has open slot
-                        print(f"(issue67)self.currIndex : {self.currIndex}")
+                        
                         self.preALUBuff[0] = self.preIssueBuff[i]
                         self.preIssueBuff[i] = -1           #set preissuebuff back to -1
                         self.currIndex += 1
                         ## self.memIndexOfNext += 4
 
                     elif self.preALUBuff[1] == -1 and self.preIssueBuff[i] == self.currIndex:# and self.address[i] == self.memIndexOfNext:
-                        print(f"(issue75)self.currIndex : {self.currIndex}")
+        
                         self.preALUBuff[1] = self.preIssueBuff[i]
                         self.preIssueBuff[i] = -1       #set preissuebuff back to -1
                         self.currIndex += 1
