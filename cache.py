@@ -62,7 +62,7 @@ class Cache:
         # isWritetoMem is aligned with isSW in the mem unit! data to write also comes from there
         # check the cache, if it is there, then we return true
         # otherwise, return a false and set up for next cycle
-        print(f"(cache65)self.numInstructions: {self.numInstructions}")
+  
 
         # calculate the address from instruction index and base address
         #################### instruction or data??? ######################
@@ -73,7 +73,7 @@ class Cache:
             #if its a data location do this
         else:
             addressLocal = 96 + (4 *  (self.numInstructions) ) + (4 * dataIndex)
-        print(f"(cache76)addressLocal : {addressLocal}")
+            
         # We are double word aligning so we need to make sure that the address of block 0 is always 96 or 96 + n8
         # 96, 104, 112 ......
         # this is critical since everything else assumes that block 0 is address1
@@ -93,17 +93,12 @@ class Cache:
 
         ############################ Deal with instruct/mem boundry ################################
         # if address1 is an instruction go to instruction list and get it
-        print(f"(cache96)address1 : {address1}")
+        
 
         if address1 < 96 + ( 4 * self.numInstructions ):   # cant use dataIndex because aligning might have bridged boundry!
             data1 = self.instructions[SetUp.getIndexOfMemAddress(address1, False, self.dataval, self.address, self.numInstructions)]
         #if data, go to the data memory and get the data
         else:
-            print(f"(cache102)address1 : {address1}")
-            print(f"(cache103)self.dataval : {self.dataval}")
-            print(f"(cache104)self.address : {self.address}")
-            print(f"cache105)self.numInstructions : {self.numInstructions}")
-            print(f"(cache106)self.")
             data1 = self.dataval[SetUp.getIndexOfMemAddress(address1, False, self.dataval, self.address, self.numInstructions)]
         # same process for address 2
         if address2 < 96 + ( 4 *  self.numInstructions ):
@@ -147,13 +142,13 @@ class Cache:
         #figure out which block has the info or not.  It might not be there
         if( self.cacheSets[setNum][0][0] == 1 and self.cacheSets[setNum][0][2] == tag ):
             # we have a hit
-            print(f"(cache145)*****cache hit!")
+            
             hit = True
             assocblock = 0   # block zero is the hit
         # look at the other associative block
         elif self.cacheSets[setNum][1][0] == 1 and self.cacheSets[setNum][1][2] == tag:
             # we have a hit
-            print(f"(cache151)*****cache hit!")
+            
             hit = True
             assocblock = 1  # block 1 is the hit
 
@@ -175,7 +170,7 @@ class Cache:
                 self.lruBit[setNum] = (assocblock + 1) % 2
             #returns a true we got a hit and the data or instruction in the specific dataword. Data word specifies
             #either the first or second word in a block based on what the instruction was.
-            #print(f"cache hit!")
+            
             return [True, self.cacheSets[setNum][assocblock][dataWord+3] ] # the +3 is to point to either [4] or [5]
 
 
@@ -256,8 +251,8 @@ class Cache:
         else:
             #VALID MISS on cycle
             # add the memory address to the just missed list if its not already there
-            print(f"(cache254)cache miss!")
+            
             if( self.justMissedList.count( address1 ) == 0 ):
                 self.justMissedList.append( address1 )
-                print(f"(cache 257)self.justMissedList{self.justMissedList}")
+                
             return [False, 0]
