@@ -95,23 +95,20 @@ class simClass:
             # print(f"cycle:{self.cycle}")
             #for testing purposes
 
-            # self.issue.preIssueBuff = [0, 1, 2, 3]
+
 
             #update buffers from WB
             # [self.R, self.postMemBuff, self.postALUBuff] = self.WB.run()
-            print(f"(simClass102)opcodestr : {self.opcodeStr}")
-            print(f"(simClass103)self.preIssueBuff : {self.preIssueBuff}")
-            print(f"(simClass104)self.arg1Str : {self.arg1Str}")
 
             #self.WB.run()
             [self.R, self.postMemBuff, self.postALUBuff, self.destReg] = self.WB.run()
             #update Buffers from ALU
-            print(f"(SimClass109)self.postMemBuff = {self.postMemBuff}")
+  
             [self.preALUBuff, self.postALUBuff] = self.ALU.run()
             [self.preMemBuff, self.postMemBuff] = self.MEM.run()
             [self.preMemBuff, self.preALUBuff, self.preIssueBuff] = self.issue.run()
             self.preIssueBuff = self.fetch.run()
-            print(f"simClass(113)self.postMemBuff = {self.postMemBuff}")
+  
             # send new buffers values to WB
             #uncommented originally and line 106
             self.WB = writeBack.WriteBack(self.R, self.postMemBuff, self.postALUBuff, self.destReg)
@@ -126,12 +123,9 @@ class simClass:
 
 
     def printState(self):
-        #print(f"simClass self.R: {self.R}")
+ 
 
-
-
-        #print(f"postALUBuff from printstate:{self.postALUBuff}")
-
+        """
         print(f"Cycle:{self.cycle}")
         #
         print("Pre-Issue Buffer:")
@@ -252,6 +246,9 @@ class simClass:
                 print(f"\t {self.dataval[i]}", end ="" )
 
         print(f"")
+        """
+        
+        
 
         """
         outFile.write("\ndata:\n")
@@ -428,90 +425,4 @@ class simClass:
 
 
 
-
-
-
-
-
-
-        #print(f"\tEntry 1:\t{self.opcodeStr[self.preALUBuff[1]]}")
-
-        # print(f"self.WB.R{self.WB.R}")
-        # print(f"self.R{self.R}")
-        # print(f"self.ALU.preALUBuff{self.ALU.preALUBuff}")
-        # print(f"self.preALUBuff{self.preALUBuff}")
-        #
-        # print(f"self.ALU.postALUBuff{self.ALU.postALUBuff}")
-        # print(f"self.postALUBuff{self.postALUBuff}")
-
-
-    # def printState(self):
-    #
-    #     outputFileName = SetUp.get_output_filename()
-    #
-    #     with open(outputFileName + "_pipeline.txt", 'a') as outFile:
-    #
-    #         i = self.getIndexOfMemAddress(self.PC)
-    #         outFile.write("---------------------\n")
-    #         outFile.write(
-    #             "cycle:" + str(self.cycle) + "\t" + "\n")
-    #
-    #         outFile.write("Pre-Issue Buffer:\n")
-    #         outFile.write("\tEntry 0:\t" + self.arg1Str[self.preIssueBuff[0]] + self.arg2Str[self.preIssueBuff[0]]
-    #                       + self.arg3Str[self.preIssueBuff[0]])
-
-            # print(f"\tEntry 0:\t{self.opcodeStr[self.preIssueBuff[0]]}"
-            #       f"{self.arg1Str[self.preIssueBuff[0]]}{self.arg2Str[self.preIssueBuff[0]]}"
-            #       f"{self.arg3Str[self.preIssueBuff[0]]}")
-
-            # outFile.write("\n")
-            # outFile.write("registers:\n")
-            # outStr = "r00:"
-            # # ***
-            # # print(len(self.dataval))
-            # # iCount = 0
-            # for i in range(0, 8):
-            #     outStr = outStr + "\t" + str(self.R[i])
-            #     # REDACTED start
-            # outFile.write(outStr + "\n")
-            #
-            # outStr = "r08: "
-            # for i in range(0, 8):
-            #     outStr = outStr + "\t" + str(self.R[i + 8])
-            #
-            # outFile.write(outStr + "\n")
-            #
-            # outStr = "r16: "
-            # for i in range(0, 8):
-            #     outStr = outStr + "\t" + str(self.R[i + 16])
-            #
-            # outFile.write(outStr + "\n")
-            #
-            # outStr = "r24: "
-            # for i in range(0, 8):
-            #     outStr = outStr + "\t" + str(self.R[i + 24])
-            #
-            # outFile.write(outStr + "\n")
-            # outFile.write("\ndata:\n")
-            # outStr = ""
-            # # REDACTED end
-            #
-            # for i in range(len(self.dataval)):
-            #     # ****
-            #     # print("Entering SECOND if loop")
-            #
-            #     if (i % 8 == 0 and i != 0 or i == len(self.dataval)):
-            #         outFile.write(outStr + "\n")
-            #
-            #     if i % 8 == 0:
-            #         outStr = str(self.address[i + self.numInstructions]) + \
-            #                  ":" + str(self.dataval[i])
-            #
-            #         # print(outStr)
-            #
-            #     if (i % 8 != 0):
-            #         outStr = outStr + "\t" + str(self.dataval[i])
-            # # print(outStr)
-            # outFile.write(outStr + "\n")
-            # outFile.close()
 
