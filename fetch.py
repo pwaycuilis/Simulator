@@ -60,7 +60,7 @@ class Fetch:
        
         if fetchesPerCycle < 2 and numInBuff < 4 and readyToCycle:
             for i in range(self.totalFetched, (len(self.instruction))):
-                print(f"(fetch74)i = {i}")
+                
                 #if self.cache.checkCache(-1, i, 0, 0):  #If passing instr index, pass -1 for data index
                 readyToCycle = self.cache.checkCache(-1, i, 0, 0)
                 if readyToCycle[0]:
@@ -76,7 +76,7 @@ class Fetch:
 
                     break
 
-        print(f"(fetch89)readyToCycle = {readyToCycle}")
+   
             #do again to get 2 fetches per cycle
         #if fetchesPerCycle < 2 and numInBuff < 4:
         if fetchesPerCycle < 2 and numInBuff < 4 and readyToCycle:
