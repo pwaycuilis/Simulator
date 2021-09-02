@@ -36,25 +36,15 @@ class Issue:
         self.preALUBuff = preALUBuff
 
     def run(self):
-        print(f"(issue39)self.destReg : {self.destReg}")
-        print(f"(issue40)self.src1Reg : {self.src1Reg}")
-        print(f"(issue41)self.src2Reg : {self.src2Reg}")
+
         numInIssueAtClockCycleBegin = 0
         readyToCycle = True
-        ##do iso loop first to determine this, then while pre, post diff is < 2, keep goign (wshiule loop)
+        
         for i in range(len(self.preIssueBuff)):
             if self.preIssueBuff[i] != -1:
                 numInIssueAtClockCycleBegin += 1
-                print(f"(issue34)numInIssue = {numInIssueAtClockCycleBegin}")
+                
 
-
-        ## print(f"preIssueBuff in issue{self.preIssueBuff}")
-        #for i in range(len(self.preIssueBuff)):
-            #if self.preIssueBuff[i] != -1:          #if preIssueBuff has valid instr
-
-            #numInIssueAtClockCycleBegin += 1
-            #print(f"len(self.preIssueBuff = {len(self.preIssueBuff)}")
-            #print(f"numInIssue = {numInIssueAtClockCycleBegin}")
 
             ##if current index instr = "ADDI" (or some other valid instr)
             ## and if preALUBuff[0] is empty and preissuebuff[i] == currIndex:
@@ -84,55 +74,34 @@ class Issue:
                 #if src1reg for stur or ldur instruction currently in prealu buff, wait until that register is done
 
                 if self.opcodeStr[self.preIssueBuff[i]] == "STUR" or self.opcodeStr[self.preIssueBuff[i]] == "LDUR":
-                    print(f"(issue84)i : {i}")
-                    print(f"(issue84)self.preIssueBuff[i] : {self.preIssueBuff[i]}")
-                    print(f"issue85)self.destReg[self.preIssueBuff[i]] : {self.destReg[self.preIssueBuff[i]]}")
-                    print(f"(issue86)self.src1Reg[self.preIssueBuff[i]] : {self.src1Reg[self.preIssueBuff[i]]}")
-                    print(f"(issue87)self.src2Reg[self.preIssueBuff[i]] : {self.src2Reg[self.preIssueBuff[i]]}")
-                    #print(f"(issue85)self.destReg[i] : {self.destReg[i]}")
-                    #print(f"(issue86)self.src1Reg[i] : {self.src1Reg[i]}")
-                    #print(f"(issue87)self.src2Reg[i] : {self.src2Reg[i]}")
-                    #print(f"(issue88)self.destReg[self.preALUBuff[0]] : {self.destReg[self.preALUBuff[0]]}")
-                    #print(f"(issue89)self.destReg[self.preALUBuff[1]] : {self.destReg[self.preALUBuff[1]]}")
+                   
                     #shuold be self.destReg[self.preIssueBuff[i]]
 
                     if self.src1Reg[self.preIssueBuff[i]] == (self.destReg[self.preALUBuff[0]] or self.destReg[self.preALUBuff[1]]) and self.src1Reg[self.preIssueBuff[i]] > -1:
                         #changed from src1Reg to src2Reg, need to make condition that both preALUBuffs are not -1 also..
-                        print(f"(issue91)self.destReg[self.preIssueBuff[i]] : {self.destReg[self.preIssueBuff[i]]}")
-                        print(f"(issue92)self.src1Reg[self.preIssueBuff[i]] : {self.src1Reg[self.preIssueBuff[i]]}")
-                        print(f"(issue93)self.src2Reg[self.preIssueBuff[i]] : {self.src2Reg[self.preIssueBuff[i]]}")
-                        print(f"(issue94)self.destReg[self.preALUBuff[0]] : {self.destReg[self.preALUBuff[0]]}")
-                        print(f"(issue95)self.destReg[self.preALUBuff[1]] : {self.destReg[self.preALUBuff[1]]}")
+                     
                         readyToCycle = False
-                        print(f"issue97) stall:raw hazard")
+                      
                     elif readyToCycle and self.preMemBuff[0] == -1 and self.preIssueBuff[i] == self.currIndex:
-                        print(f"(issue99)self.currIndex : {self.currIndex}")
+                       
                         self.preMemBuff[0] = self.preIssueBuff[i]
                         self.preIssueBuff[i] = -1
                         self.currIndex += 1
 
                     elif readyToCycle and self.preMemBuff[1] == -1 and self.preIssueBuff[i] == self.currIndex:
-                        print(f"(issue105)self.currIndex : {self.currIndex}")
+                        
                         self.preMemBuff[1] = self.preIssueBuff[i]
                         self.preIssueBuff[i] = -1
                         self.currIndex += 1
-                ###***
-                #if self.opcodedStr[self.preIssueBuff[i]]
+               
 
 
-        ##print(f"num at end{numInIssueAtClockCycleBegin}")
 
-        ##print(f"pre")
-
-        # return Issue(self.preIssueBuff, self.preMemBuff, self.preALUBuff, self.instruction, self.opcode, self.opcodeStr,
-        #          self.dataval, self.address, self.arg1, self.arg2, self.arg3, self.numInstructions, self.destReg, self.src1Reg, self.src2Reg)
-
-        if not readyToCycle:
-            print(f"(issue121)readyToCycle : {readyToCycle} ")
+        #if not readyToCycle:
+            #print(f"(issue121)readyToCycle : {readyToCycle} ")
 
 
         return [self.preMemBuff, self.preALUBuff, self.preIssueBuff]
 
-        # curr = self.preIssueBuff[0]
 
 
