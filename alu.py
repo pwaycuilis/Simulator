@@ -18,23 +18,14 @@ class ALU:
 
     def run(self):
 
-        #self.preALUBuff = [0, 1]
-
-        #sim = simClass.simClass()
-        print(f"(alu24)self.preALUBuff[0] = {self.preALUBuff[0]}")
+        
         i = self.preALUBuff[0]
 
 
-        # armState.R[self.arg3[i]] = armState.R[self.arg1[i]] + armState.R[self.arg2[i]]
 
 
-        ##############
-        #print(f"self.postALUBuff[0] = {self.postALUBuff[0]}")
-        #print(f"self.postALUBuff[1] = {self.postALUBuff[1]}")
-        #self.preALUBuff[0] and self.postALUBuff[1] both incrementing by 1 each cycle
         self.postALUBuff = [-1, -1]
-        #print(f"self.postALUBuff[0] = {self.postALUBuff[0]}")
-        #print(f"self.postALUBuff[1] = {self.postALUBuff[1]}")
+
 
         if self.opcodeStr[i] == "ADD":
             self.postALUBuff = [self.R[self.arg1[i]] + self.R[self.arg2[i]], i]
@@ -82,13 +73,8 @@ class ALU:
             #LSL RD = Rn << Shamt
 
         elif self.opcodeStr[i] == "LSL":
-            #print(f"self.R[self.arg2[i] : {self.R[self.arg2[i]]}")
-            #print(f"self.R[self.arg1[i] : {self.R[self.arg1[i]]}")
-            #print(f"i : {i}")
-            #print(f"self.R[self.arg1[i] << self.R[self.arg1[i] : {self.R[self.arg1[i]] << self.R[self.arg1[i]]}")
-            #self.postALUBuff = [self.R[self.arg2[i]] << self.R[self.arg1[i]], i]
+          
             self.postALUBuff = [self.R[self.arg2[i]] << self.arg1[i], i]
-            #self.postALUBuff = [self.R[self.arg2[i]] << self.R[self.arg1[i]], i]
 
             # elif self.opcode[i] == 1360:
             #     armState.R[self.arg3[i]] = armState.R[self.arg1[i]] | armState.R[self.arg2[i]]
@@ -99,7 +85,6 @@ class ALU:
 
 
 
-        #rmState.R[self.arg3[i]] = armState.R[self.arg1[i]] & armState.R[self.arg2[i]]
 
 
         #move instruction in entry 1 to entry 0 and then clear entry 1
@@ -112,18 +97,12 @@ class ALU:
             #armState.R[self.arg1[i]] = armState.R[self.arg2[i]] + self.arg3[i]
 
 
-        # return ALU(self.R, self.postALUBuff, self.preALUBuff,self.opcodeStr,
-        #             self.arg1, self.arg2, self.arg3)
+
 
         return [self.preALUBuff, self.postALUBuff]
 
-        # (self, R, postALUBuff, preALUBuff, opcodeStr, arg1, arg2, arg3):
-
-        # return ALU(self.R, self.postALUBuff, self.preALUBuff, self.opcodeStr, self.arg1,
-        #            self.arg2, self.arg3)
 
 
 
 
-    # def updateBuffer(self):
-    #     return [self.preALUBuff, self.postALUBuff]
+ 
